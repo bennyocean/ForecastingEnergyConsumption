@@ -68,7 +68,7 @@ In addition, I created three lag features, commonly used in time series data, in
 
 ### 4. Train Using Cross Validation
 
-''' python
+``` python
 FEATURES = ['dayofyear', 'hour', 'dayofweek', 'quarter', 'month','year',
                 'lag1','lag2','lag3']
 TARGET = 'PJME_MW'
@@ -105,7 +105,7 @@ for train_idx, val_idx in tss.split(df):
     preds.append(y_pred)
     score = np.sqrt(mean_squared_error(y_val, y_pred))
     scores.append(score)
-'''
+```
 
 ![Feature_importance](assets/Feature_importance.png)
 *Feature importance of the model trained*
@@ -122,7 +122,7 @@ Here's the breakdown of the cross validation:
 
 To predict the future using the trained model, I created a new dataframe for the one-year period ahead using all features (default). However, before creating the new dataframe, I run the machine learning model on the entire PJME energy consumption data set. After concatinating both dataframes, the future data is predicted and plotted using the updated model. Finally, the model is saved for future utilization.
 
-''' python
+``` python
 df = create_features(df)
 
 FEATURES = ['dayofyear', 'hour', 'dayofweek', 'quarter', 'month', 'year',
@@ -151,7 +151,7 @@ df['isFuture'] = False
 df_and_future = pd.concat([df, future_df])
 df_and_future = create_features(df_and_future)
 df_and_future = add_lags(df_and_future)
-'''
+```
 
 ![future_prediction](assets/future_prediction.png)
 *Forecasting the future of the energy consumption for the next year*
